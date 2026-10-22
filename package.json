@@ -1,0 +1,32 @@
+{
+  "name": "mi-project-agentic-feeding",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agentischer Ingest für Abschlussarbeiten der Medieninformatik (TH Köln). Liefert eine index.json für den mi-project-proxy.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "config": {
+    "baseUrl": "https://th-koeln.github.io/mi-project-agentic-feeding/",
+    "schemaUpstream": "https://raw.githubusercontent.com/th-koeln/mi-project-proxy/refs/heads/main/thesis-schema.json",
+    "maxPdfMb": 20,
+    "teaserMaxWidth": 1600
+  },
+  "scripts": {
+    "doctor": "node scripts/doctor.js",
+    "validate": "node scripts/validate.js",
+    "build": "node scripts/build-index.js",
+    "slug": "node scripts/slug.js",
+    "supervisor": "node scripts/supervisor.js",
+    "image": "node scripts/process-image.js",
+    "sync-schema": "node scripts/sync-schema.js",
+    "test": "WORKS_DIR=examples/works node scripts/validate.js && WORKS_DIR=examples/works OUT_DIR=_site-test node scripts/build-index.js"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "sharp": "^0.35.5",
+    "yaml": "^2.9.1"
+  }
+}

@@ -1,0 +1,8 @@
+node_modules/
+_site/
+_site-test/
+.DS_Store
+
+# Rohmaterial landet nie im Repo
+_inbox/*
+!_inbox/.gitkeep

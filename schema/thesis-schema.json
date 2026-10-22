@@ -1,0 +1,226 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12",
+  "$id": "https://th-koeln.de/mi/abschlussarbeiten/schema/v1",
+  "title": "Abschlussarbeit",
+  "description": "Schema für Abschlussarbeiten und Praxisprojekte im Medieninformatik-Studiengang der TH Köln (zusammengeführt aus mi-bachelor-abschlussarbeiten und cnoss/thesis)",
+  "type": "object",
+  "required": [
+    "title",
+    "type",
+    "date",
+    "firstname",
+    "lastname",
+    "first_supervisor",
+    "second_supervisor",
+    "status",
+    "visibility",
+    "teaser_image_url",
+    "teaser_image_copyright"
+
+  ],
+  "properties": {
+
+    "title": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Vollständiger Titel der Abschlussarbeit"
+    },
+
+    "type": {
+      "type": "string",
+      "enum": ["Guided Projct", "Praxisprojekt", "Bachelorarbeit", "Masterarbeit"],
+      "description": "Art der Arbeit"
+    },
+
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Abgabedatum der Arbeit im Format YYYY-MM-DD"
+    },
+
+    "status": {
+      "type": "string",
+      "enum": ["in-preparation", "in-progress", "in-evaluation", "finished"],
+      "description": "Aktueller Bearbeitungsstatus der Arbeit"
+    },
+
+    "visibility": {
+      "type": "string",
+      "enum": ["published", "unpublished"],
+      "default": "unpublished",
+      "description": "Sichtbarkeit des Eintrags auf der Website"
+    },
+
+    "firstname": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Vorname der Autorin / des Autors"
+    },
+
+    "lastname": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Nachname der Autorin / des Autors"
+    },
+
+    "first_supervisor": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name der Erstprüferin / des Erstprüfers"
+    },
+
+    "second_supervisor": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name der Zweitprüferin / des Zweitprüfers"
+    },
+
+
+    "abstract": {
+      "type": "string",
+      "description": "Inhaltliche Zusammenfassung der Arbeit (Markdown)"
+    },
+
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Schlagwörter zur inhaltlichen Einordnung der Arbeit"
+    },
+
+    "thesis_url": {
+      "type": "string",
+      "description": "Relativer Pfad zur PDF-Datei der Arbeit oder absolute URL"
+    },
+
+    "teaser_image_url": {
+      "type": "string",
+      "description": "Relativer Pfad zum Teaserbild oder absolute URL"
+    },
+
+    "teaser_image_copyright": {
+      "type": "string",
+      "description": "Urheber- bzw. Copyrightangabe zum Teaserbild"
+    },
+
+    "avatar_url": {
+      "type": "string",
+      "description": "Relativer Pfad oder URL zum Profilfoto der Autorin / des Autors"
+    },
+
+    "repository_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL zum Quellcode-Repository (z. B. GitHub)"
+    },
+
+    "project_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL zur Live-Demo, zum begleitenden Projekt oder weiterführenden Informationen"
+    },
+
+    "slideshow": {
+      "type": "boolean",
+      "default": false,
+      "description": "Gibt an, ob eine Präsentation (Slideshow) verfügbar ist"
+    },
+
+    "final_presentation_youtube_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{11}$",
+      "description": "YouTube-Video-ID des Abschlusspräsentationsvideos (11-stellig)"
+    },
+
+    "research_diary": {
+      "type": "boolean",
+      "default": false,
+      "description": "Gibt an, ob ein Forschungstagebuch geführt wurde"
+    },
+
+    "personal_website_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Persönliche Website der Autorin / des Autors"
+    },
+
+    "personal_social_media_urls": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "uniqueItems": true,
+      "description": "Social-Media-Profile (LinkedIn, Xing, Facebook, Instagram, Twitter/X)"
+    },
+
+    "cooperation_partner": {
+      "type": "string",
+      "description": "Name des Kooperationsunternehmens oder der Kooperationseinrichtung"
+    },
+
+    "cooperation_partner_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Website des Kooperationspartners"
+    },
+
+    "awards": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "description": "Auszeichnungen oder Awards, die für die Arbeit vergeben wurden"
+    }
+
+  },
+  "dependentRequired": {
+    "teaser_image_copyright": ["teaser_image_url"],
+    "cooperation_partner_url": ["cooperation_partner"]
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "title": "Visualisierung landwirtschaftlicher Sensordaten mittels Augmented Reality",
+      "type": "Masterarbeit",
+      "date": "2024-06-12",
+      "status": "finished",
+      "visibility": "published",
+      "firstname": "Lennard",
+      "lastname": "Häring",
+      "first_supervisor": "Prof. Benno Stein",
+      "second_supervisor": "Dr. Harald Nitz",
+      "abstract": "Diese Arbeit entwickelt einen Digitalen Zwilling für Vertical-Farming-Anlagen, der Sensordaten mittels Augmented Reality visualisiert.",
+      "keywords": ["Augmented Reality", "Smart Farming", "Vertical Farming", "IoT", "Digital Twin"]
+    },
+    {
+      "title": "Konzeption und Implementierung einer web-basierten Plattform zur musikalischen Echtzeit-Kollaboration an Modular-Synthesizern",
+      "type": "Masterarbeit",
+      "date": "2024-08-22",
+      "status": "finished",
+      "visibility": "published",
+      "firstname": "Sebastian",
+      "lastname": "Brock",
+      "first_supervisor": "Prof. Dr. Theresa Schmiedel",
+      "second_supervisor": "Dr. Harald Nitz",
+      "thesis_url": "thesis_sebastian_brock.pdf",
+      "keywords": ["Web Audio API", "Real-time Collaboration", "Modular Synthesis", "WebRTC", "Music Technology"],
+      "cooperation_partner": "Ableton AG",
+      "cooperation_partner_url": "https://www.ableton.com/",
+      "repository_url": "https://github.com/sebastianbrock/modular-web-collab",
+      "project_url": "https://modular-collab-platform.io",
+      "slideshow": true,
+      "final_presentation_youtube_id": "dQw4w9WgXcQ",
+      "personal_website_url": "https://sebastian-brock-music.com",
+      "personal_social_media_urls": [
+        "https://www.linkedin.com/in/sebastian-brock-music"
+      ]
+    }
+  ]
+}
