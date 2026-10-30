@@ -43,7 +43,8 @@ if (command === 'lookup' && arg) {
   } else if ([work.data.first_supervisor, work.data.second_supervisor].includes(me.name)) {
     console.log(`OK: ${me.name} ist Prüfer*in dieser Arbeit.`);
   } else {
-    console.log(`WARNUNG: ${me.name} ist weder Erst- noch Zweitprüfer*in dieser Arbeit (${work.data.first_supervisor} / ${work.data.second_supervisor}).`);
+    const names = [work.data.first_supervisor, work.data.second_supervisor].filter(Boolean).join(' / ');
+    console.log(`WARNUNG: ${me.name} ist weder Erst- noch Zweitprüfer*in dieser Arbeit (${names}).`);
   }
 } else {
   console.error('Aufruf: npm run supervisor -- lookup <name> | check <slug>');

@@ -43,7 +43,7 @@ Ermittle alle Felder aus `schema/thesis-schema.json`. Die Pflichtfelder sind:
 | `status` | `in-preparation`, `in-progress`, `in-evaluation` oder `finished`. |
 | `visibility` | Immer `published`. Nicht nachfragen. |
 | `firstname`, `lastname` | Der Autor bzw. die Autorin. |
-| `first_supervisor`, `second_supervisor` | Über `npm run supervisor -- lookup <name>` auf die volle Schreibweise normalisieren (siehe unten). |
+| `first_supervisor`, `second_supervisor` | Über `npm run supervisor -- lookup <name>` auf die volle Schreibweise normalisieren (siehe unten). **Ausnahme:** Bei `Praxisprojekt` gibt es keine Zweitprüfer*in. Dort `second_supervisor` weglassen und nicht danach fragen. |
 | `teaser_image_url` | Immer `teaser.webp`. Das Bild ist Pflicht (siehe Schritt 5). |
 | `teaser_image_copyright` | Immer nachfragen (siehe Schritt 5). |
 
