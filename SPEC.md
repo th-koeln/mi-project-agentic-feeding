@@ -16,7 +16,7 @@ Die Medieninformatik-Website zeigt Projekte und Abschlussarbeiten über den `mi-
 | 4 | Agent | Agentenagnostisch: `AGENTS.md` als Quelle, `CLAUDE.md` und Skill als dünne Hülle, Claude Code als Referenz | Niemanden wegen der Wahl des Agenten ausschließen |
 | 5 | Voice | Nur Diktat im Dialog (Voice-Modus des Agenten bzw. OS). Keine Audioverarbeitung im Repo | Die Anleitung braucht nur einen Interview-Modus für bruchstückhafte Angaben |
 | 6a | Teaserbild | Pflicht. Skript konvertiert zu WebP mit max. 1600 px. Fehlt ein Bild, fragt der Agent immer nach | Die Website braucht immer ein Bild |
-| 6b | Copyright | Immer nachfragen. Bleibt es unklar, wird die Autor*in eingetragen | Nichts erfinden |
+| 6b | Copyright | Immer nachfragen. Ohne geklärte Bildrechte wird nicht veröffentlicht | Nichts erfinden; gleiche Regel wie im Praxisprojektseminar |
 | 6c | PDF | Veröffentlichung nur nach ausdrücklicher Zustimmung. Max. 20 MB, sonst Hinweis zum Komprimieren | Rechte, Repo-Größe |
 | 6d | Rohmaterial | `_inbox/` steht in `.gitignore`, Rohmaterial kommt nie ins Repo | Öffentliches Repo |
 | 7 | Freigabe | Lokale Validierung grün → Bestätigung → direkter Push auf `main`. Die CI validiert vor dem Deploy erneut | Lehrende sind vertrauenswürdig, PRs wären hier nur Reibung |
@@ -30,12 +30,6 @@ Die Medieninformatik-Website zeigt Projekte und Abschlussarbeiten über den `mi-
 | 14 | Mehrbenutzerbetrieb | Ein Ordner pro Arbeit. `index.json` liegt nie im Repo. Der Agent macht `pull --rebase` vor Start und Push, die CI hat eine `concurrency`-Gruppe | Praktisch keine Konflikte |
 | 15 | Fremde Einträge | Der Agent warnt, wenn die Git-E-Mail laut `supervisors.json` weder Erst- noch Zweitprüfer*in ist. Er verhindert nichts | Versehentliche Änderungen vermeiden |
 | 16 | Slug | `vorname-nachname-YYYY-MM-DD`, ASCII-normalisiert, bleibt bei Änderungen stabil | Gleiches Muster wie Kirby |
-
-## Offene Punkte außerhalb dieses Repos
-
-- Im Upstream-Schema (`mi-project-proxy/thesis-schema.json`) steht der Tippfehler `"Guided Projct"`. Nach der Korrektur: `npm run sync-schema`.
-- Das Upstream-Schema nennt `$schema: "https://json-schema.org/draft/2020-12"` (korrekt wäre `…/draft/2020-12/schema`). `validate.js` umgeht das.
-- PHP-Adapter für `index.json` im Proxy (`detail.mode: internal`).
 
 ## Mögliche Ausbaustufen
 

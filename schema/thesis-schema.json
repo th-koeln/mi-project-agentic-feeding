@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://th-koeln.de/mi/abschlussarbeiten/schema/v1",
   "title": "Abschlussarbeit",
   "description": "Schema für Abschlussarbeiten und Praxisprojekte im Medieninformatik-Studiengang der TH Köln (zusammengeführt aus mi-bachelor-abschlussarbeiten und cnoss/thesis)",
@@ -19,6 +19,18 @@
   ],
   "properties": {
 
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stabile ID der Arbeit innerhalb der Quelle, z. B. für die Adresse der Detailseite"
+    },
+
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Zeitpunkt der letzten Änderung des Eintrags (ISO 8601)"
+    },
+
     "title": {
       "type": "string",
       "minLength": 5,
@@ -27,7 +39,7 @@
 
     "type": {
       "type": "string",
-      "enum": ["Guided Projct", "Praxisprojekt", "Bachelorarbeit", "Masterarbeit"],
+      "enum": ["Guided Project", "Praxisprojekt", "Bachelorarbeit", "Masterarbeit"],
       "description": "Art der Arbeit"
     },
 
@@ -71,7 +83,7 @@
     "second_supervisor": {
       "type": "string",
       "minLength": 1,
-      "description": "Name der Zweitprüferin / des Zweitprüfers (Pflicht, außer bei Praxisprojekten)"
+      "description": "Name der Zweitprüferin / des Zweitprüfers (Pflicht bei Bachelor- und Masterarbeiten, sonst optional)"
     },
 
 
@@ -109,6 +121,12 @@
     "avatar_url": {
       "type": "string",
       "description": "Relativer Pfad oder URL zum Profilfoto der Autorin / des Autors"
+    },
+
+    "detail_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Absolute URL einer HTML-Detailseite auf dem Server der Quelle (keine PDF, kein Repository)"
     },
 
     "repository_url": {
@@ -183,12 +201,18 @@
     "teaser_image_copyright": ["teaser_image_url"],
     "cooperation_partner_url": ["cooperation_partner"]
   },
-  "if": {
-    "properties": { "type": { "const": "Praxisprojekt" } }
-  },
-  "else": {
-    "required": ["second_supervisor"]
-  },
+  "allOf": [
+    {
+      "description": "Abschlussarbeiten brauchen eine Zweitprüferin / einen Zweitprüfer",
+      "if": {
+        "properties": { "type": { "enum": ["Bachelorarbeit", "Masterarbeit"] } },
+        "required": ["type"]
+      },
+      "then": {
+        "required": ["second_supervisor"]
+      }
+    }
+  ],
   "additionalProperties": false,
   "examples": [
     {
@@ -201,6 +225,8 @@
       "lastname": "Häring",
       "first_supervisor": "Prof. Benno Stein",
       "second_supervisor": "Dr. Harald Nitz",
+      "teaser_image_url": "teaser_lennard_haering.jpg",
+      "teaser_image_copyright": "Lennard Häring",
       "abstract": "Diese Arbeit entwickelt einen Digitalen Zwilling für Vertical-Farming-Anlagen, der Sensordaten mittels Augmented Reality visualisiert.",
       "keywords": ["Augmented Reality", "Smart Farming", "Vertical Farming", "IoT", "Digital Twin"]
     },
@@ -214,6 +240,8 @@
       "lastname": "Brock",
       "first_supervisor": "Prof. Dr. Theresa Schmiedel",
       "second_supervisor": "Dr. Harald Nitz",
+      "teaser_image_url": "teaser_sebastian_brock.jpg",
+      "teaser_image_copyright": "Sebastian Brock",
       "thesis_url": "thesis_sebastian_brock.pdf",
       "keywords": ["Web Audio API", "Real-time Collaboration", "Modular Synthesis", "WebRTC", "Music Technology"],
       "cooperation_partner": "Ableton AG",

@@ -18,6 +18,8 @@ cd mi-project-agentic-feeding
 
 `npm install` und den Umgebungscheck (`npm run doctor`) übernimmt der Agent beim ersten Mal selbst. Ohne lokales Setup lässt sich das Repo auch in GitHub Codespaces öffnen.
 
+**Zugang:** Zum Pushen brauchst du Schreibrechte auf das Repo. Schick Christian Noss (christian.noss@th-koeln.de) eine kurze Mail mit deinem GitHub-Benutzernamen, dann bekommst du Zugriff. Alternativ geht ein Pull-Request; schick dann bitte auch kurz eine Nachricht, sonst geht er unter.
+
 **Einmalig:** Trag deine Git-E-Mail bei deinem Eintrag in `supervisors.json` unter `git_emails` ein. Dann warnt der Agent, wenn du eine Arbeit änderst, bei der du nicht Prüfer*in bist.
 
 **Löschen** macht der Agent nicht. Um eine Arbeit zu entfernen, löschst du den Ordner `works/<slug>/` selbst und pushst.

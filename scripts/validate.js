@@ -7,8 +7,6 @@ import addFormats from 'ajv-formats';
 import { ROOT, config, ASSET_FIELDS, isAbsoluteUrl, slugify, listWorkDirs, loadWork } from './lib/works.js';
 
 const schema = JSON.parse(fs.readFileSync(path.join(ROOT, 'schema', 'thesis-schema.json'), 'utf8'));
-// Das Upstream-Schema nennt eine nicht auflösbare Meta-Schema-URL; Ajv2020 kennt den Draft ohnehin.
-delete schema.$schema;
 
 const ajv = new Ajv2020({ allErrors: true, strict: false });
 addFormats(ajv);

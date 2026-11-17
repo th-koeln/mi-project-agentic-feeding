@@ -13,7 +13,7 @@ Sprich mit der Lehrenden auf Deutsch. Halte dich kurz und frag gebündelt statt 
 1. **Nichts erfinden.** Inhalte kommen aus dem Material oder von der Lehrenden. Ausnahmen stehen ausschließlich unter „Inhaltsregeln“.
 2. **Nie löschen.** Du löschst keine Arbeiten, keine Ordner und keine Dateien in `works/`. Wenn die Lehrende etwas entfernen will, sagst du ihr, dass sie das selbst tun muss. Auch `_inbox/` räumst du nicht auf.
 3. **Rohmaterial kommt nie ins Repo.** `_inbox/` steht in `.gitignore`. Kopiere nie Dateien aus `_inbox/` direkt nach `works/`. Bilder laufen durch `npm run image`, PDFs werden nur nach ausdrücklicher Freigabe kopiert.
-4. **Kein Push ohne grüne Validierung und ohne Bestätigung** der Lehrenden.
+4. **Kein Push ohne grüne Validierung, geklärte Bildrechte und Bestätigung** der Lehrenden.
 5. **Kein `git push --force`, kein `git reset --hard`, kein Umschreiben der Historie.**
 6. **Während eines Ingests änderst du nur** `works/<slug>/` und gegebenenfalls `supervisors.json`. Schema, Skripte und Anleitung bleiben unangetastet.
 7. **Andere Quellen** (Kirby, persönliche Websites, Proxy) prüfst du nicht. Dubletten suchst du nur in diesem Repo.
@@ -38,7 +38,7 @@ Ermittle alle Felder aus `schema/thesis-schema.json`. Die Pflichtfelder sind:
 | Feld | Hinweise |
 |---|---|
 | `title` | Exakt wie in der Arbeit, keine Umformulierung. Immer in Anführungszeichen schreiben. |
-| `type` | Genau einer der Werte: `Bachelorarbeit`, `Masterarbeit`, `Praxisprojekt`, `Guided Projct`. **Achtung:** Der Tippfehler `Guided Projct` steht so im Schema und muss so geschrieben werden, solange das Schema nicht korrigiert ist. |
+| `type` | Genau einer der Werte: `Bachelorarbeit`, `Masterarbeit`, `Praxisprojekt`, `Guided Project`. |
 | `date` | Abgabedatum `YYYY-MM-DD`, in Anführungszeichen. Ist nur Monat oder Semester bekannt, frag nach. Rate nicht. |
 | `status` | `in-preparation`, `in-progress`, `in-evaluation` oder `finished`. |
 | `visibility` | Immer `published`. Nicht nachfragen. |
@@ -61,7 +61,7 @@ Ist die Person unbekannt, frag nach der vollen Schreibweise mit Titel. Biete dan
 - **Ohne Bild geht es nicht.** Liegt keins bei, frag ausdrücklich danach. Du kannst anbieten, eine Seite bzw. Abbildung aus der PDF zu rendern (`pdftoppm -png -r 150 -f <seite> -l <seite> <pdf> _inbox/seite`, falls installiert). Generiere **kein** Bild selbst.
 - Gibt es mehrere Bilder, lass die Lehrende wählen.
 - Verarbeiten: `npm run image -- _inbox/<bild> <slug>`. Das erzeugt `works/<slug>/teaser.webp`.
-- **Copyright immer nachfragen.** Bleibt die Antwort offen oder unklar, trag `<Vorname> <Nachname>` der Autor*in ein und erwähne das in der Zusammenfassung.
+- **Copyright immer nachfragen.** Eingetragen wird nur, was die Lehrende ausdrücklich angibt. Bleiben die Bildrechte offen, hältst du vor dem Commit an: Die Arbeit bleibt lokal in `works/<slug>/` und wird erst veröffentlicht, wenn die Rechte geklärt sind. Sag der Lehrenden das so.
 
 ### 6. PDF der Arbeit
 - Eine PDF in `_inbox/` ist zunächst nur **Quelle zum Auslesen**.
@@ -106,7 +106,6 @@ Zeig der Lehrenden den kompletten Eintrag (Frontmatter und Abstract) und markier
 - **Korrekturen:** „Ich habe ‚Visualiserung‘ zu ‚Visualisierung‘ korrigiert.“
 - **Selbst generierte Keywords**, falls zutreffend
 - **Gekürzter Abstract**, falls zutreffend
-- **Copyright-Fallback**, falls zutreffend
 - ob die PDF veröffentlicht wird
 
 Erst nach einem klaren „Ja“ geht es weiter.
@@ -119,6 +118,7 @@ git pull --rebase
 git push
 ```
 Wird der Push abgelehnt: `git pull --rebase` und erneut pushen. Bei einem echten Konflikt hältst du an und erklärst die Lage.
+Fehlen die Schreibrechte (z. B. `Permission denied` oder `403`), hältst du ebenfalls an. Die Lehrende schickt Christian Noss eine kurze Mail mit ihrem GitHub-Benutzernamen und bekommt dann Zugriff. Alternativ bietest du einen Pull-Request an; danach soll sie Christian Noss kurz Bescheid geben, sonst geht der Pull-Request unter.
 Danach sagst du, dass die Arbeit nach dem GitHub-Action-Lauf (ca. 1–2 Minuten) in der `index.json` steht. Erinnere daran, dass die Dateien in `_inbox/` noch dort liegen und die Lehrende sie selbst entfernen kann.
 
 ---
