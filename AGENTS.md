@@ -42,12 +42,14 @@ Ermittle alle Felder aus `schema/thesis-schema.json`. Die Pflichtfelder sind:
 | `date` | Abgabedatum `YYYY-MM-DD`, in Anführungszeichen. Ist nur Monat oder Semester bekannt, frag nach. Rate nicht. |
 | `status` | `in-preparation`, `in-progress`, `in-evaluation` oder `finished`. |
 | `visibility` | Immer `published`. Nicht nachfragen. |
-| `firstname`, `lastname` | Der Autor bzw. die Autorin. |
+| `firstname`, `lastname` | Der Autor bzw. die Autorin. Bei mehreren Personen die erste (siehe `authors`). |
 | `first_supervisor`, `second_supervisor` | Über `npm run supervisor -- lookup <name>` auf die volle Schreibweise normalisieren (siehe unten). **Ausnahme:** Bei `Praxisprojekt` gibt es keine Zweitprüfer*in. Dort `second_supervisor` weglassen und nicht danach fragen. |
 | `teaser_image_url` | Immer `teaser.webp`. Das Bild ist Pflicht (siehe Schritt 5). |
 | `teaser_image_copyright` | Immer nachfragen (siehe Schritt 5). |
 
-Optionale Felder trägst du nur ein, wenn sie aus dem Material oder von der Lehrenden kommen: `abstract`, `keywords`, `thesis_url`, `repository_url`, `project_url`, `final_presentation_youtube_id` (nur die 11-stellige ID), `personal_website_url`, `personal_social_media_urls`, `cooperation_partner`, `cooperation_partner_url`, `awards`, `avatar_url`, `slideshow`, `research_diary`. **Andere Felder sind nicht erlaubt** (`additionalProperties: false`).
+**Mehrere Autor*innen** (typisch bei Guided Projects, manchmal auch bei Abschlussarbeiten): Alle Personen kommen in der Reihenfolge aus dem Material in `authors`, die erste steht zusätzlich in `firstname` und `lastname`. Der Slug entsteht aus dieser ersten Person. Bei einer einzelnen Person bleibt `authors` weg. Ist bei einem Guided Project nur eine Person genannt, fragst du, ob es weitere gibt.
+
+Optionale Felder trägst du nur ein, wenn sie aus dem Material oder von der Lehrenden kommen: `authors`, `abstract`, `keywords`, `thesis_url`, `repository_url`, `project_url`, `final_presentation_youtube_id` (nur die 11-stellige ID), `personal_website_url`, `personal_social_media_urls`, `cooperation_partner`, `cooperation_partner_url`, `awards`, `avatar_url`, `slideshow`, `research_diary`. **Andere Felder sind nicht erlaubt** (`additionalProperties: false`).
 
 ### 3. Dubletten prüfen
 `npm run slug -- <vorname> <nachname> <YYYY-MM-DD>` liefert den Slug und listet vorhandene Arbeiten mit gleichem Nachnamen.
@@ -91,6 +93,16 @@ keywords:
 ---
 
 Hier steht der Abstract als Markdown, gern mit mehreren Absätzen.
+```
+
+Bei mehreren Autor*innen kommt nach `lastname`:
+
+```yaml
+authors:
+  - firstname: Dennis
+    lastname: Neumann
+  - firstname: Richard
+    lastname: Reh
 ```
 
 YAML-Fallen: `title`, `date` und alle Strings mit `:` oder `#` in Anführungszeichen setzen. Leere Felder weglassen statt `null` zu schreiben.

@@ -52,6 +52,17 @@ function checkWork(work) {
     warnings.push('teaser_image_url: kein WebP – Bild mit "npm run image" verarbeiten');
   }
 
+  // Repo-Regel: Bei mehreren Autor*innen steht die erste Person auch in firstname/lastname
+  if (Array.isArray(data.authors) && data.authors.length) {
+    const first = data.authors[0] || {};
+    if (first.firstname !== data.firstname || first.lastname !== data.lastname) {
+      errors.push(`authors: die erste Person (${first.firstname || '?'} ${first.lastname || '?'}) muss mit firstname/lastname übereinstimmen`);
+    }
+    if (data.authors.length === 1) {
+      warnings.push('authors: nur eine Person eingetragen – bei einer Person authors weglassen');
+    }
+  }
+
   if (data.firstname && data.lastname && data.date) {
     const expected = slugify(data.firstname, data.lastname, data.date);
     if (expected !== work.slug) warnings.push(`Ordnername weicht vom erwarteten Slug "${expected}" ab`);

@@ -30,8 +30,9 @@ Die Medieninformatik-Website zeigt Projekte und Abschlussarbeiten über den `mi-
 | 14 | Mehrbenutzerbetrieb | Ein Ordner pro Arbeit. `index.json` liegt nie im Repo. Der Agent macht `pull --rebase` vor Start und Push, die CI hat eine `concurrency`-Gruppe | Praktisch keine Konflikte |
 | 15 | Fremde Einträge | Der Agent warnt, wenn die Git-E-Mail laut `supervisors.json` weder Erst- noch Zweitprüfer*in ist. Er verhindert nichts | Versehentliche Änderungen vermeiden |
 | 16 | Slug | `vorname-nachname-YYYY-MM-DD`, ASCII-normalisiert, bleibt bei Änderungen stabil | Gleiches Muster wie Kirby |
+| 17 | Mehrere Autor*innen | Optionales Feld `authors`, die erste Person steht zusätzlich in `firstname`/`lastname`, der Slug entsteht aus ihr. `validate.js` prüft die Übereinstimmung | Bestehende Einträge und andere Quellen bleiben gültig |
 
 ## Mögliche Ausbaustufen
 
-- Lehr- und Forschungsprojekte (eigenes Schema, mehrere Autor*innen)
+- Lehr- und Forschungsprojekte (eigenes Schema)
 - Studierende als Einreichende mit PR-Workflow
